@@ -251,7 +251,7 @@ console.log(getCarInfoByIndex(inventory, 0));
  * it will return `This is a Lincoln Town Car`.
 */
 function getLastCarInfo(carArray) {
-  const pulledCar = carArray[carArray.length - 1];
+  const pulledCar = carArray[carArray.length - 1]; 
   return `This is a ${pulledCar.car_make} ${pulledCar.car_model}`;
 }
 console.log(getLastCarInfo(inventory));
@@ -289,10 +289,18 @@ console.log(getModelYears(inventory));
  * For example, if getCarInfoById is invoked with the inventory and the number 1,
  * it will return `This is a Lincoln Navigator`.
 */
-function getCarInfoById(/* code here */) {
-  /* code here */
-}
+function getCarInfoById(carArray, carId) {
 
+  for(i =0; i <carArray.length; i++){
+    const pulledCar = carArray[i];
+    for(let key in pulledCar){
+      if(key == 'id' & pulledCar[key] == carId){
+        return `This is a ${pulledCar.car_make} ${pulledCar.car_model}`;
+      }
+    }
+  }
+}
+console.log(getCarInfoById(inventory, 1));
 /**
  * ### Challenge `getOlderCars`
  * * THIS ONE IS A STRETCH GOAL. ATTEMPT IT ONLY AFTER
@@ -307,9 +315,19 @@ function getCarInfoById(/* code here */) {
  * with a `car_year` which is at most the given desired max year,
  * in the same order as they appear in the original inventory.
 */
-function getOlderCars(/* code here */) {
-  /* code here */
+function getOlderCars(carArray, carMaxYear) { // Runs and outputs correctly in repel not outputting in vscode for some reason. https://repl.it/repls/NeighboringGracefulLifecycles
+  let carOutput = [];
+  for(i=0; i < carArray.length; i++){
+    const pulledCar = carArray[i];
+    for(let key in pulledCar){
+      if(key == 'car_year' & pulledCar[key] < carMaxYear){
+        carOutput.push(carArray[i]);
+      }
+    }
+  }
+  return carOutput;
 }
+console.log(getOlderCars(inventory, 2000));
 
 /**
  * ### Challenge `getGermanCars`
